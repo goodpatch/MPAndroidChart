@@ -303,17 +303,17 @@ public abstract class AxisBase extends ComponentBase {
     }
 
     /**
-     * Sets the number of label entries for the y-axis max = 25, min = 2, default: 6, be aware
+     * Sets the number of label entries for the y-axis max = 30, min = 1, default: 6, be aware
      * that this number is not fixed.
      *
      * @param count the number of y-axis labels that should be displayed
      */
     public void setLabelCount(int count) {
 
-        if (count > 25)
-            count = 25;
-        if (count < 2)
-            count = 2;
+        if (count > 30)
+            count = 30;
+        if (count < 1)
+            count = 1;
 
         mLabelCount = count;
         mForceLabels = false;
