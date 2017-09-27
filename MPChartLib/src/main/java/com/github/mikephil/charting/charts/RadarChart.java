@@ -45,6 +45,11 @@ public class RadarChart extends PieRadarChartBase<RadarData> {
     private int mWebColorInner = Color.rgb(122, 122, 122);
 
     /**
+     * color for the outer web
+     */
+    private Integer mOutermostWebColor = null;
+
+    /**
      * transparency the grid is drawn with (0-255)
      */
     private int mWebAlpha = 150;
@@ -237,6 +242,17 @@ public class RadarChart extends PieRadarChartBase<RadarData> {
 
     public float getWebLineWidthInner() {
         return mInnerWebLineWidth;
+    }
+
+    /**
+     * @param color
+     */
+    public void setOutermostWebColor(int color) {
+        mOutermostWebColor = color;
+    }
+
+    public Integer getOutermostWebColor() {
+        return mOutermostWebColor;
     }
 
     /**

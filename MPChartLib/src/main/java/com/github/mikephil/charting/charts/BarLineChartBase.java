@@ -224,9 +224,13 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
         if (mAxisRight.isEnabled() && mAxisRight.isDrawLimitLinesBehindDataEnabled())
             mAxisRendererRight.renderLimitLines(canvas);
 
+        // animation clipping
+        RectF animationRect = new RectF(mViewPortHandler.getContentRect());
+        animationRect.right *= mAnimator.getPhaseX();
+
         // make sure the data cannot be drawn outside the content-rect
         int clipRestoreCount = canvas.save();
-        canvas.clipRect(mViewPortHandler.getContentRect());
+        canvas.clipRect(animationRect);
 
         mRenderer.drawData(canvas);
 
@@ -252,13 +256,15 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
         mAxisRendererLeft.renderAxisLabels(canvas);
         mAxisRendererRight.renderAxisLabels(canvas);
 
+        clipRestoreCount = canvas.save();
+        canvas.clipRect(animationRect);
         if (isClipValuesToContentEnabled()) {
-            clipRestoreCount = canvas.save();
+            int clipRestoreCountA = canvas.save();
             canvas.clipRect(mViewPortHandler.getContentRect());
 
             mRenderer.drawValues(canvas);
 
-            canvas.restoreToCount(clipRestoreCount);
+            canvas.restoreToCount(clipRestoreCountA);
         } else {
             mRenderer.drawValues(canvas);
         }
@@ -277,6 +283,7 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
             Log.i(LOG_TAG, "Drawtime: " + drawtime + " ms, average: " + average + " ms, cycles: "
                     + drawCycles);
         }
+        canvas.restoreToCount(clipRestoreCount);
     }
 
     /**
