@@ -80,7 +80,7 @@ public abstract class BarLineScatterCandleBubbleRenderer extends DataRenderer {
          * @param dataSet
          */
         public void set(BarLineScatterCandleBubbleDataProvider chart, IBarLineScatterCandleBubbleDataSet dataSet) {
-            float phaseX = Math.max(0.f, Math.min(1.f, mAnimator.getPhaseX()));
+            float phaseX = 1;//Math.max(0.f, Math.min(1.f, mAnimator.getPhaseX()));
 
             float low = chart.getLowestVisibleX();
             float high = chart.getHighestVisibleX();
